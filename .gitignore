@@ -15,3 +15,6 @@ desktop.ini
 
 # Respaldos de .env
 .env.*
+
+# Índice de vectores (generado por ingest.py)
+**/index/
