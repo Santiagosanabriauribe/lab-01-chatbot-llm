@@ -1,0 +1,63 @@
+﻿
+=== Modo router ===
+
+ #  ruta / tools                                     ok  llam. tok. ent. tok. sal.
+ 1  directa                                          —       2       729       106
+    P: hola
+    R: ¡Hola! ¿En qué puedo ayudarte con el tema de Inteligencia Artificial?
+ 2  directa                                          —       2       741       293
+    P: ¿Qué es el mecanismo de atención?
+    R: El mecanismo de atención permite que un modelo pese de forma diferencial cada elemento de una secuencia al gen
+ 3  documentos                                       sí      2      1230       176
+    P: ¿Cuál es la nota mínima para aprobar el curso?
+    R: La nota mínima para aprobar el curso es **3.0** sobre una escala de 0.0 a 5.0【1】.
+ 4  documentos                                       sí      2      1051       402
+    P: ¿Qué pasa si entrego tarde un laboratorio?
+    R: Si entregas un laboratorio después de la fecha límite, la entrega sigue siendo aceptada solo si la envías dent
+ 5  documentos                                       NO      2      1337       256
+    P: ¿Cuándo es el primer parcial?
+    R: El primer parcial se realizará el **martes 20 de octubre de 2026 a las 6:00 p. m.** en el salón B‑204, según e
+ 6  acciones: consultar_notas                        sí      3      3240       294
+    P: ¿Cuáles son mis notas? Mi código es 2026001
+    R: Ana Torres (código 2026001), tus notas registradas son:  - Parcial 1: **sin registrar**   - Parcial 2: **sin r
+ 7  acciones                                         NO      2      1235       206
+    P: Mi código es 2026001. Si saco 4.0 en los dos parciales y 4.0 en el proyecto, ¿con cuánto quedo?
+    R: Para calcular la nota final también necesito el promedio de los laboratorios. ¿Podrías indicarme ese valor (en
+ 8  acciones                                         NO      2      1189       239
+    P: ¿Cuántos días faltan para el primer parcial?
+    R: No dispongo de la información sobre la fecha exacta del primer parcial del curso. Si me indicas la fecha progr
+
+Respuestas con el dato esperado: 3/6
+Rutas correctas: 7/7
+Llamadas al LLM: 17 · tokens entrada=10752 salida=1972 · tiempo=53 s
+
+=== Modo agente ===
+
+ #  ruta / tools                                     ok  llam. tok. ent. tok. sal.
+ 1  (sin tools)                                      —       1       992        41
+    P: hola
+    R: ¡Hola! ¿En qué puedo ayudarte con el curso de Inteligencia Artificial?
+ 2  (sin tools)                                      —       1       998       130
+    P: ¿Qué es el mecanismo de atención?
+    R: El mecanismo de atención permite que un modelo pese de forma diferencial cada elemento de la entrada al genera
+ 3  (sin tools)                                      sí      1      1002       129
+    P: ¿Cuál es la nota mínima para aprobar el curso?
+    R: La nota mínima para aprobar el curso es **3.0 sobre 5.0**.
+ 4  buscar_documentos                                sí      2      2506       179
+    P: ¿Qué pasa si entrego tarde un laboratorio?
+    R: Si entregas un laboratorio después de la fecha límite, la entrega sigue siendo aceptada hasta **48 horas** pos
+ 5  buscar_documentos                                NO      2      2511       190
+    P: ¿Cuándo es el primer parcial?
+    R: El primer parcial está programado para el **martes 20 de octubre de 2026 a las 6:00 p. m.** en el salón B‑204 
+ 6  consultar_notas                                  sí      2      2124       172
+    P: ¿Cuáles son mis notas? Mi código es 2026001
+    R: Tus notas actuales son: parcial 1: *sin registrar*, parcial 2: *sin registrar*, laboratorios: 4.5 y 4.0 (prome
+ 7  (sin tools)                                      NO      1      1025        69
+    P: Mi código es 2026001. Si saco 4.0 en los dos parciales y 4.0 en el proyecto, ¿con cuánto quedo?
+    R: Para calcular la nota final necesito también el promedio de los laboratorios. ¿Podrías indicarme cuál es tu pr
+ 8  buscar_documentos, fecha_actual, dias_hasta      sí      4      5695       346
+    P: ¿Cuántos días faltan para el primer parcial?
+    R: Faltan **3 días** para el primer parcial, que se realizará el martes 20 de octubre de 2026.
+
+Respuestas con el dato esperado: 4/6
+Llamadas al LLM: 14 · tokens entrada=16853 salida=1256 · tiempo=51 s
